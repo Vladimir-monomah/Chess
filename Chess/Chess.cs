@@ -1,4 +1,6 @@
-﻿namespace Chess
+﻿using System.Collections.Generic;
+
+namespace ChessRules
 {
     public class Chess
     {

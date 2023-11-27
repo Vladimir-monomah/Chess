@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chess
+namespace ChessRules
 {
     struct Square
     {
@@ -18,16 +18,14 @@ namespace Chess
             this.   y = y;
         }
 
-        public Square(string e2)
+        public Square(string name)
         {
-            if(e2.Length==2&&
-                e2[0]>='a' &&
-                e2[0]<='h'&&
-                e2[1]>='1'&&
-                e2[1]<='8')
+            if(name.Length==2&&
+                name[0]>='a'&&name[0]<='h'&&
+                name[1]>='1'&&name[1]<='8')
             {
-                x=e2[0]-'a';
-                y=e2[1]-'1';
+                x=name[0]-'a';
+                y=name[1]-'1';
             }
             else
             {
@@ -41,7 +39,16 @@ namespace Chess
                 y>= 0 && y<8;
         }
 
-        public string Name { get { return ((char)('a'+x)).ToString()+(y+1).ToString(); } }
+        public string Name {
+            get
+            {
+                if (OnBoard())
+                    return ((char)('a'+x)).ToString()+
+                        (y+1).ToString();
+                else
+                    return "-";
+            }
+        }
 
         public  static bool operator==(Square a,Square b)
         {
